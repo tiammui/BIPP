@@ -17,7 +17,7 @@ BIPP's bipp-style the user chose can be assessed from 'document.bippForm.bippSty
 
 ```html
 <link rel="stylesheet" type="text/css" href="bipp.css" />
-<script type="text/javascript" src="bipp.js" async></script>
+<script type="text/javascript" src="bipp_module.js" async></script>
 ```
 
 > NOTE;- the 2nd `<script>` tag has an attribute of `'async'` it to prevent Event Listeners used in the module from loading before the module configuration pass some element into the DOM.
