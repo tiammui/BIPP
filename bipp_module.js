@@ -1,6 +1,6 @@
 // @ts-check
 
-// const {BIPP,Bipp} = require('./bippType');
+const {BIPP,Bipp} = require('./bippType');
 
 
 
@@ -604,8 +604,11 @@ var bipp = (function (){
     }
 
     if(target&&!document.getElementById(target)){
+      // If user provide `target`, there must be an HTMLElement with ID ===`target` else return error
       return console.error("BIPP could not initialize, HTMLElement with the id of '"+target+"' does not exist in DOM");
     }
+
+    // If user provide `target`, the HTMLElement reference is stored to `bippModule` else a virtual HTMLElement is created and stored to `bippModule`
     bippModule=(target&&document.getElementById(target))||createVirtualModule();
 		bippModule.innerHTML = '<div class="bipp-uploader-con"><label><div class="bipp-uploader" onmouseover="bipp.hover(event,\'uploader\')">'+configuration.uploaderHtml+'</div><input class="bipp-input" type="file" accept="image/*" tabindex="0"></label></div><!-- A mock tag that is used to get the width and height of uploaded image --><img class="bipp-image"><div class="bipp-upload-status"></div><div class="bipp-upload-prompt">'+configuration.uploadPrompt+'</div><div class="bipp-frames-container"><input type="radio" name="bipp-style" value="" style="width:20px;height:20px" checked></div><div class="bipp-change-file"><div class="bipp-change-file-prompt">'+configuration.changeFilePrompt+'</div><canvas class="bipp-canvas" width="'+configuration.width+'" height="'+configuration.height+'" style="display:none"></canvas><button class="bipp-change-button" onclick="bipp.changeImage()">'+configuration.changeButton+'</button></div>';
 
@@ -997,4 +1000,5 @@ var bipp = (function (){
 //      cropEnabling(crop plug-in integration)
 //    - BIPP error event integration
 //    - Polyfill for Array.prototype.indexOf, URL.createObjectURL
+//    - BIPP for server
 
