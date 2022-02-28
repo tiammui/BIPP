@@ -909,7 +909,7 @@ var bipp = (function (){
 		// if value is still `true` after above clearing, fallback for older browser is attempted
 		if(input.value){
 			input.value.type='text';
-			input.value.type=='file';
+			input.value.type='file';
 		}
 
 		input.click();
@@ -1001,4 +1001,6 @@ var bipp = (function (){
 //    - BIPP error event integration
 //    - Polyfill for Array.prototype.indexOf, URL.createObjectURL
 //    - BIPP for server
+//    - unchanged dimensions(width,aspect ratio) for uploaded image,
+//      'same' value to `width` in sessionOption
 
