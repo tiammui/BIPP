@@ -778,7 +778,7 @@ var bipp = (function (){
     if(index===-1) return console.error(new Error("The HTMLElement to be refreshed have not been decoded"));
 
     var style = elemDecodes[index].bippStyle.split("-");
-    elem.style.height = elem.scrollWidth/+style[1]+configuration.measureUnit;
+    elem.style.height = (elem.scrollWidth/+style[1])+configuration.measureUnit;
 
   }
   function refreshID(IDPort){
@@ -805,7 +805,7 @@ var bipp = (function (){
     if(!elem) return console.error("HTMLElement with ID of "+IDPort+" does not exist, so it can't be refreshed");
 
     var style = IDdecodes[index].bippStyle.split("-");
-    elem.style.height = elem.scrollWidth/+style[1]+configuration.measureUnit;
+    elem.style.height = (elem.scrollWidth/+style[1])+configuration.measureUnit;
 	}
   function refreshGroup(groupPort){
     // if groupPort === undefined, refresh all groupPort
@@ -908,8 +908,8 @@ var bipp = (function (){
 
 		// if value is still `true` after above clearing, fallback for older browser is attempted
 		if(input.value){
-			input.value.type='text';
-			input.value.type='file';
+			input.type='text';
+			input.type='file';
 		}
 
 		input.click();
@@ -927,37 +927,44 @@ var bipp = (function (){
     return browserCanCompress;
 	}
 	function on(eventName,callback){
-		switch(eventName){
-			case "start":
-				events.start.push(callback)
-				break;
-			case "beforeSelect":
-				events.beforeSelect.push(callback)
-				break;
-			case "afterSelect":
-				events.afterSelect.push(callback)
-				break;
-			case "beforeCompress":
-				events.beforeCompress.push(callback)
-				break;
-			case "afterCompress":
-				events.afterCompress.push(callback)
-				break;
-			case "frameSelect":
-				events.frameSelect.push(callback)
-				break;
-			case "frameHover":
-				events.frameHover.push(callback)
-				break;
-			case "uploaderHover":
-				events.uploaderHover.push(callback)
-				break;
-			case "changeButtonClick":
-				events.changeButtonClick.push(callback)
-				break;
-			default: console.trace(eventName+" is not an eventName");
-				console.error(eventName+" is not an eventName")
-		}
+    var eventsList = ['start','beforeSelect','afterSelect','beforeCompress','afterCompress','frameSelect','frameHover','uploaderHover','changeButtonClick']
+    if (eventsList.indexOf(eventName)!==-1){
+      events[eventName].push(callback)
+    } else {
+      console.trace(eventName+" is not an eventName");
+			console.error(eventName+" is not an eventName")
+    }
+		// // switch(eventName){
+		// // 	case "start":
+		// // 		events.start.push(callback)
+		// // 		break;
+		// // 	case "beforeSelect":
+		// // 		events.beforeSelect.push(callback)
+		// // 		break;
+		// // 	case "afterSelect":
+		// // 		events.afterSelect.push(callback)
+		// // 		break;
+		// // 	case "beforeCompress":
+		// // 		events.beforeCompress.push(callback)
+		// // 		break;
+		// // 	case "afterCompress":
+		// // 		events.afterCompress.push(callback)
+		// // 		break;
+		// // 	case "frameSelect":
+		// // 		events.frameSelect.push(callback)
+		// // 		break;
+		// // 	case "frameHover":
+		// // 		events.frameHover.push(callback)
+		// // 		break;
+		// // 	case "uploaderHover":
+		// // 		events.uploaderHover.push(callback)
+		// // 		break;
+		// // 	case "changeButtonClick":
+		// // 		events.changeButtonClick.push(callback)
+		// // 		break;
+		// // 	default: console.trace(eventName+" is not an eventName");
+		// // 		console.error(eventName+" is not an eventName")
+		// // }
 	}
 
 
@@ -995,6 +1002,7 @@ var bipp = (function (){
 
 // TODO
 //    - BIPP undecoding function
+//    - Removal of BIPP UI, cleaning code, integrating bipp.renderUI() for BIPP UI
 //    - BIPP encoding upgrade. bippCord and 'compressed'
 //    - BIPP auto-select(center select), fastSelect(3 options) and 
 //      cropEnabling(crop plug-in integration)

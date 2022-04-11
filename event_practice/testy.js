@@ -11,8 +11,7 @@ var can = document.getElementById('kill');
 mum.addEventListener("change",fileListener)
 function fileListener(e){
     console.log(e);
-    var file=e.target.files[0]
-    
+    var file=e.target.files[0]    
     if(file){
         console.log("%c Hurray","color:blue;background-color:aqua");
     } else {
